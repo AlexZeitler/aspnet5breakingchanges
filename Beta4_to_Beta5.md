@@ -31,6 +31,7 @@ var configuration = configurationBuilder.Build();
 ````
 
 ### IOutputFormatter
+* No official Announcement
 
 `IOutputFormatter` no longer contains the `Instance` property.
 
