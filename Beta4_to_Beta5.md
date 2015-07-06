@@ -29,3 +29,27 @@ var configurationBuilder = new ConfigurationBuilder(
 );
 var configuration = configurationBuilder.Build();
 ````
+
+### IOutputFormatter
+
+`IOutputFormatter` no longer contains the `Instance` property.
+
+Your old code like this:
+````
+services.ConfigureMvc(options =>
+{
+  (options.OutputFormatters.First(f => f.Instance is JsonOutputFormatter).Instance as
+    JsonOutputFormatter).SerializerSettings.ContractResolver =
+    new CamelCasePropertyNamesContractResolver();
+});
+````
+  
+has to be changed to this:
+`````
+services.ConfigureMvc(options =>
+{
+  (options.OutputFormatters.First(f => f is JsonOutputFormatter) as
+      JsonOutputFormatter).SerializerSettings.ContractResolver =
+      new CamelCasePropertyNamesContractResolver();
+});
+````
